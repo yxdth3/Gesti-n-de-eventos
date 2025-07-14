@@ -1,10 +1,10 @@
-//Aqui se implementan las funciones para comunicarte con la API 
-//Realizar pedticoones HTTP cpn Fetch (GET, POST, PUT, DELETE)
+//Here are implemented the functions to communicate with the API
+//Perform HTTP requests with Fetch (GET, POST, PUT, DELETE)
 
 export const api = {
     url: 'http://localhost:3000',
 
-    //función GET
+    //function GET
     get: async parameter => {
         try {
             const response = await fetch(`${api.url}${parameter}`);
@@ -18,7 +18,7 @@ export const api = {
         }
     },
 
-    //función POST
+    //function POST
     post: async (parameter,data) => {
         try {
             const response = await fetch(`${api.url}${parameter}`, {
@@ -39,7 +39,7 @@ export const api = {
         }
     },
 
-    //función put
+    //function PUT
     put: async (parameter, data) => {
     try {
       const response = await fetch(`${api.url}${parameter}`, {
@@ -59,7 +59,7 @@ export const api = {
     }
   },
 
-  //función delete
+  //function DELETE
   delete: async parameter => {
     try {
         const response = await fetch(`${api.url}${parameter}`, {

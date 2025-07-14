@@ -1,53 +1,53 @@
-// Importa los módulos necesarios
+
 import { auth } from './auth.js';
 import {
-  pageLogin, // Implementa en views.js
-  showRegister, // Implementa en views.js
-  showDashboard, // Implementa en views.js
-  showEvents, // Implementa en views.js
-  showCreateEvents, // Implementa en views.js
-  showEditEvents, // Implementa en views.js
-  renderNotFound // Implementa en views.js
+    pageLogin, // Implement in views.js
+    showRegister, // Implement in views.js
+    showDashboard, // Implement in views.js
+    showEvents, // Implement in views.js
+    showCreateEvents, // Implement in views.js
+    showEditEvents, // Implement in views.js
+    renderNotFound // Implement in views.js
 } from './views.js';
 
-// Define aquí las rutas de tu SPA
+//spa routes
 const routes = {
-  '#/login': pageLogin, // Vista de login
-  '#/register': showRegister, // Vista de registro
-  '#/dashboard': showDashboard, // Vista principal tras login
-  '#/dashboard/events': showEvents, // Listado de cursos
-  '#/dashboard/events/create': showCreateEvents, // Formulario para crear curso
-  '#/dashboard/events/edit': showEditEvents, // Formulario para editar curso
+  '#/login': pageLogin, // Login view
+  '#/register': showRegister, // Registry view
+  '#/dashboard': showDashboard, // Main view after login
+  '#/dashboard/events': showEvents, // List of events
+  '#/dashboard/events/create': showCreateEvents, // Form to create event
+  '#/dashboard/events/edit': showEditEvents, // Form to edit event
 };
 
-// Función principal de enrutamiento
+// Main routing function
 export function router() {
   const path = location.hash || '#/login';
   const user = auth.getUser();
 
-  // Ejemplo: proteger rutas de dashboard
+  // protect dashboard routes
   if (path.startsWith('#/dashboard') && !auth.isAuthenticated()) {
     location.hash = '#/login';
     return;
   }
 
-  // Ejemplo: evitar que usuarios logueados accedan a login/register
+  //Prevent logged-in users from accessing login/register
   if ((path === '#/login' || path === '#/register') && auth.isAuthenticated()) {
     location.hash = '#/dashboard';
     return;
   }
 
-  // Ejemplo: ruta dinámica para editar curso
+  // dynamic route to edit course
   if (path.startsWith('#/dashboard/events/edit/')) {
-    showEditEvents(); // Implementa esta función en views.js
+    showEditEvents(); 
     return;
   }
 
-  // Cargar la vista correspondiente
+  // Load the corresponding view
   const view = routes[path];
   if (view) {
     view();
   } else {
-    renderNotFound(); // Implementa esta función en views.js
+    renderNotFound(); 
   }
 }

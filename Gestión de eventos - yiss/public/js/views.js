@@ -1,13 +1,13 @@
-import { api } from './api.js'; // Implementa y exporta funciones de API en api.js
-import { auth } from './auth.js'; // Implementa y exporta funciones de autenticación en auth.js
-import { router } from './router.js'; // Importa el enrutador para redirigir después de acciones
+import { api } from './api.js'; 
+import { auth } from './auth.js'; 
+import { router } from './router.js'; 
 
-// Muestra un mensaje de página no encontrada
+// Display a page not found message
 export function renderNotFound() {
-  document.getElementById('app').innerHTML = '<h2> Página no encontrada </h2>';
+  document.getElementById('app').innerHTML = '<h2> Page not found </h2>';
 }
 
-// Implementa la vista de login
+// Implements the login view
 export async function pageLogin() {
   document.getElementById('app').innerHTML = `
     <div class="login-container">
@@ -15,9 +15,9 @@ export async function pageLogin() {
         <h2 style="text-align:center; margin-bottom:1em;">Login</h2>
         <input type="email" id="email" placeholder="email">
         <input type="password" id="password" placeholder="password">
-        <button> Entrar </button>
+        <button> Sign in </button>
         <br>
-        <a href="#/register" data-link> ¿No tienes cuenta? Regístrate </a>
+        <a href="#/register" data-link> Don't have an account? Sign up </a>
       </form>
     </div>`;
   document.getElementById('form-login').onsubmit = async event => {
@@ -32,7 +32,7 @@ export async function pageLogin() {
   };
 }
 
-// Implementa la vista de registro
+// Implements the register view
 export async function showRegister() {
   document.getElementById('app').innerHTML = `
     <div class="login-container">
@@ -40,20 +40,20 @@ export async function showRegister() {
         <h2 style="text-align:center; margin-bottom:1em;"> Registro </h2>
         <input placeholder="nombre" id="name">
         <input placeholder="email" id="email">
-        <label for="role"> Selecciona tu rol: </label>
+        <label for="role"> Select your role: </label>
         <select name="role" id="role">
             <option value="administrator"> Administrator </option>
             <option value="visitor"> Visitor </option>
         </select>
         <input placeholder="pass" id="password">
-        <button> Registrar </button>
+        <button> Register </button>
       </form>
     </div>`;
   document.getElementById('form-register').onsubmit = async event => {
     event.preventDefault();
     try {
       await auth.register(event.target.name.value, event.target.role.value, event.target.email.value, event.target.password.value);
-      alert('Usuario registrado con éxito')
+      alert('Successfully registered user')
       location.hash = '#/dashboard';
       router();
     } catch (err) {
@@ -62,14 +62,14 @@ export async function showRegister() {
   };
 }
 
-// Implementa la vista principal del dashboard
+// Implements the principal view of dashboard
 export async function showDashboard() {
   const u = auth.getUser();
   document.getElementById('app').innerHTML = `
-    <h2> Bienvenido, ${u.name} (${u.role})</h2>
-    <button id="out"> Salir </button>
+    <h2> Welcome, ${u.name} (${u.role})</h2>
+    <button id="out"> Log out </button>
     <nav>
-      <a href="#/dashboard/events" data-link> Ver eventos </a>
+      <a href="#/dashboard/events" data-link> View events </a>
       ${u.role === 'administrator' ? `<a href="#/dashboard/events/create" data-link> Create event </a>` : ''}
     </nav>`;
   document.getElementById('out').onclick = () => {
@@ -84,13 +84,13 @@ export async function showDashboard() {
   });
 }
 
-// Implementa la vista de listado de cursos
+// Implement the list view of events 
 export async function showEvents() {
   const user = auth.getUser();
   const events = await api.get('/events');
 
   document.getElementById('app').innerHTML = `
-    <h2> Eventos disponibles </h2>
+    <h2> Available events </h2>
     ${user.role === 'administrator' ? `<button onclick="createEvents(${events.id})"> Create </button>` : ''}
     <ul>${events.map( event => `
       <li>${event.topic || 'No topic '} (${event.capacity || 0} cupos) — Place: ${event.place || 'N/A'} — Date: ${event.date || 'No asignada...'} — Hour: ${event.hour || 'No asignada...'}
@@ -105,20 +105,20 @@ export async function showEvents() {
       btn.onclick = async () => {
         const eventId = btn.dataset.id;
 
-        // Obtener curso actual
+        // Get current course
         const event = await api.get('/events/' + eventId);
 
-        // Evitar doble inscripción
+        // Avoid double registration
         if (event.enrolled.includes(user.email)) {
-          alert('Ya estás inscrito en este curso.');
+          alert('You are already enrolled in this course.');
           return;
         }
 
         let capacity = event.capacity-1;
 
-        // Verificar capacidad
+        // Check capacity
         if (event.enrolled.length >= event.capacity) {
-          alert('Este evento ya está lleno.');
+          alert('This event is already full.');
           return;
         }
 
@@ -126,14 +126,14 @@ export async function showEvents() {
         event.capacity = capacity;
 
         await api.put('/events/' + eventId, event);
-        alert('Inscripción exitosa!');
-        showEvents(); // recargar lista
+        alert('Successful registration!');
+        showEvents(); // reload list
       };
     });
   }
 }
 
-// Implementa la vista para crear un curso (solo admin)
+// Implements the view to create a course (admin only)
 export function showCreateEvents() {
   document.getElementById('app').innerHTML = `
     <h2> Crear Evento </h2>
@@ -143,7 +143,7 @@ export function showCreateEvents() {
       <input type="number" placeholder="Capacidad" id="capacity">
       <input type="date" placeholder="Date" id="date">
       <input type="time" placeholder="Hour" id="hour">
-      <button> Guardar </button>
+      <button> Save </button>
     </form>`;
   document.getElementById('form-create-event').onsubmit = async event => {
     event.preventDefault();
@@ -160,7 +160,7 @@ export function showCreateEvents() {
   };
 }
 
-// Implementa la vista para editar un curso (solo admin)
+// Implements the view to edit a course (admin only)
 export async function showEditEvents() {
   const user = auth.getUser();
   if (user.role !== 'administrator') {
@@ -184,7 +184,7 @@ export async function showEditEvents() {
       <input type="number" id="capacity" placeholder="Capacidad" value="${event.capacity}">
       <input type="date" id="date" placeholder="Date" value="${event.date}">
       <input type="time" id="hour" placeholder="Hour" value="${event.hour}">
-      <button> Guardar </button>
+      <button> Save </button>
     </form>`;
 
   document.getElementById('form-edit-event').onsubmit = async event => {
@@ -200,6 +200,6 @@ export async function showEditEvents() {
     await api.put('/events/' + eventId, updated);
     location.hash = '#/dashboard/events';
     router();
-    alert('Evento creado/editado exitosamente.');
+    alert('Event edited successfully.');
   };
 }

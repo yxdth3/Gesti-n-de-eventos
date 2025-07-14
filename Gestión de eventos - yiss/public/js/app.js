@@ -1,7 +1,7 @@
-import './api.js'; // Implementa la API en js/api.js
-import './auth.js'; // Implementa la autenticación en js/auth.js
-import { router } from './router.js'; // Implementa el enrutador en js/router.js
+import './api.js'; // Implement the API in js/api.js
+import './auth.js'; // Implement authentication in js/auth.js
+import { router } from './router.js'; // Implement the router in js/router.js
 
-// Inicializa el enrutador al cargar la página y al cambiar el hash
+// Initializes the router on page load and when the hash changes
 window.addEventListener('DOMContentLoaded', router);
 window.addEventListener('hashchange', router);

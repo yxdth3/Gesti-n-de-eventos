@@ -1,6 +1,6 @@
 body { font-family: sans-serif; margin: 2em; } button { margin-left: 0.5em; }
 
-/* Estilos generales */
+
 h1, h2, h3 {
   color: #16141a;
   margin-bottom: 0.5em;
@@ -71,7 +71,7 @@ nav a {
   transition: text-decoration 0.2s;
 }
 
-/* Estilos para el login */
+
 .login-container {
   display: flex;
   flex-direction: column;

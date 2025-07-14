@@ -1,45 +1,44 @@
-import { api } from './api.js'; // Implementa y exporta funciones de API en api.js
+import { api } from './api.js'; // Implement and export API functions in api.js
 
 export const auth = {
-  // Implementa la función de login
+    // Implements the login function
   login: async (email, password) => {
-    // TODO: Consulta la API para buscar el usuario por email
-    // Si la contraseña coincide, guarda el usuario en localStorage
-    // Lanza un error si las credenciales no son válidas
+    // Query the API to find the user by email
+    // If the password matches, save the user to localStorage
+    // Throw an error if the credentials are invalid
     const users = await api.get(`/users?email=${email}`);
     if (users.length === 0 || users[0].password !== password) {
       throw new Error('Invalid credentials');
     }
     const user = users[0];
-    localStorage.setItem('user', JSON.stringify(user)); // Guarda el usuario en localStorage
+    localStorage.setItem('user', JSON.stringify(user)); // Save the user to localStorage
   },
-  // Implementa la función de registro
+    // Implements the logging function
   register: async (name, role, email, password) => {
-    // TODO: Consulta la API para verificar si el email ya existe
-    // Si no existe, registra el usuario y guárdalo en localStorage
-    // Lanza un error si el email ya está registrado
+    // Query the API to see if the email already exists
+    // If it doesn't exist, register the user and save it to localStorage
     const existingUser = await api.get(`/users?email=${email}`);
     if (existingUser.length > 0) {
-      throw new Error('El email ya está registrado');
+      throw new Error('The email is already registered');
     }
     const newUser = { name, role ,email, password: password };
-    await api.post('/users', newUser); // Registra el nuevo usuario
+    await api.post('/users', newUser); // Register the new user
   },
-  // Implementa la función de logout
+    // Implements the logout function
   logout: () => {
-    // TODO: Elimina el usuario de localStorage y redirige a login
-    localStorage.removeItem('user'); // Elimina el usuario guardado
+    //Delete the user from localStorage and redirect to login
+    localStorage.removeItem('user'); // Delete the saved user
   },
-  // Devuelve true si hay usuario autenticado
+    // Returns true if there is an authenticated user
   isAuthenticated: () => {
-    // TODO: Devuelve true si hay usuario en localStorage
-    return !!localStorage.getItem('user'); // Devuelve true si hay un usuario guardado
+    // // Returns true if there is a user in localStorage
+    return !!localStorage.getItem('user'); 
   },
-  // Devuelve el usuario autenticado
+    // Returns the authenticated user
   getUser: () => {
-    // TODO: Devuelve el usuario guardado en localStorage (o null)
+    // Returns the user saved in localStorage (or null)
     const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null; // Devuelve el usuario parseado o null si no existe
+    return user ? JSON.parse(user) : null; 
    
   }
 };
