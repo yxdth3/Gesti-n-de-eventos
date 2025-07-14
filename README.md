@@ -1,4 +1,4 @@
-Event Management ✨
+✨ Event Management ✨
 
 I am a web developer who has been commissioned to develop a Single Page Application (SPA) dedicated to event management, designed to allow an event organizer to manage a series of events based on venue and attendee availability.
 
