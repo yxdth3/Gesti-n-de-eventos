@@ -1,62 +1,58 @@
-✨ Gestión de eventos ✨ 
+Event Management ✨
 
-Soy un desarrollador web que ha recibido el encargo de desarrollar una Single Page
-Application (SPA) dedicada a la gestión de eventos, diseñada para que un organizador de eventos
-pueda gestionar una serie de eventos basados en la disponibilidad de lugares y asistentes.
+I am a web developer who has been commissioned to develop a Single Page Application (SPA) dedicated to event management, designed to allow an event organizer to manage a series of events based on venue and attendee availability.
 
-📝 Descripción 📝
+📝 Description 📝
 
-Este proyecto incluye la implementación de funcionalidades clave como la autenticación de usuarios, gestión de rutas protegidas, y persistencia de sesión, utilizando tecnologías modernas de
-JavaScript, HTML5, y CSS. 
+This project includes the implementation of key features such as user authentication, secure route management, and session persistence, using modern JavaScript, HTML5, and CSS technologies.
 
-🛠️ Tecnologías usadas 🛠️
+🛠️ Technologies used 🛠️
 
-CSS Personalizado
-JavaScript vanilla
-HTML básico, solo para el muestreo de la data
+Custom CSS
+Vanilla JavaScript
+Basic HTML, only for data sampling
 
-💻 Instalación y uso local 💻
+💻 Local installation and use 💻
 
-Para acceder al archivo
+To access the file
 
-* Clona este repositorio con : git clone https://github.com/yxdth3/Gesti-n-de-eventos
+* Clone this repository with: git clone https://github.com/yxdth3/Gesti-n-de-eventos
 
-* Navega al directorio del proyecto cd Gesti-n-de-eventos
+* Navigate to the project directory cd Gesti-n-de-eventos
 
-* Instalación de dependencias =>
-npm i (o npm install)
+* Install dependencies =>
+npm i (or npm install)
 npm run start:api
 npm start
 
-* Para levantar el json-server solo corre en una terminal dentro del proyecto : json-server --watch db.json --port 3000
+* To start the json-server, just run it in a terminal within the project: json-server --watch db.json --port 3000
 
-*Abrir index.html y correr con live server 
+* Open index.html and run it with the live server
 
-💻 Funcionalidades 💻
-+ Registro e inicio de sesión con roles.
-+ CRUD de eventos para administradores.
-+ Inscripción a ceventos para visitantes.
-+ Vistas depende a tipos de usuarios.
-+ Rutas protegidas y redireccionamiento.
+💻 Features 💻
++ Registration and login with roles.
++ Event CRUD for administrators.
++ Event registration for visitors.
++ Views depend on user types.
++ Secure routes and redirection.
 
-
-🚧 Estructura 🚧
+🚧 Structure 🚧
 ```
 
-├── Gestión de eventos/
-│   ├── public/                    
-        ├── js/
-            ├── api.js             # Métodos del CRUD (con fetch)
-            ├── app.js             # Inicializa las rutas y carga cada página
-            ├── auth.js            # Autenticación 
-            ├── router.js          # Administra las rutas
-            ├── views.js  
-        ├── style.css  
-    ├── index.html                 # Lógica principal (inicio del SPA)
-├── db.json                        # Archivo JSON
+├── Event Management/
+│ ├── public/
+├── js/
+├── api.js # CRUD methods (with fetch)
+├── app.js # Initialize routes and load each page
+├── auth.js # Authentication
+├── router.js # Manage routes
+├── views.js
+├── style.css
+├── index.html # Main logic (starting the SPA)
+├── db.json # JSON file
 ├── package-lock.json
-└── package.json                    
+└── package.json
 ```
-📞 Contacto 📞
+📞 Contact 📞
 
-Nombre: Yiseth Gutiérrez Teléfono: 3206781487 Correo: gutierrezyiseth3@gmail.com GitHub: @yxdth3
+Name: Yiseth Gutiérrez Phone: 3206781487 Email: gutierrezyiseth3@gmail.com GitHub: @yxdth3
